@@ -87,7 +87,7 @@ return sock.msg(data);
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json", function (json) {
+        $.get("https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
@@ -229,9 +229,9 @@ return str;
         status: false,
         name: "TFS Bot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/bot.js",
+        scriptLink: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/master/bot.js",
         cmdLink: "No current list",
-        chatLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/en.json",
+        chatLink: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/masterlang/en.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
@@ -239,8 +239,8 @@ return str;
         settings: {
             botName: "TFS Bot",
             language: "english",
-            chatLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/en.json",
-            scriptLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/bot.js",
+            chatLink: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/lang/en.json",
+            scriptLink: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/bot.js",
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
@@ -298,10 +298,10 @@ return str;
             songstats: true,
             commandLiteral: "!",
             blacklists: {
-                NSFW: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/NSFW.json",
-                OP: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/OP.json",
-                BANNED: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/BANNED.json",
-                AWFUL: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/AWFUL.json"
+                NSFW: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/blacklists/NSFW.json",
+                OP: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/blacklists/OP.json",
+                BANNED: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/BANNED.json",
+                AWFUL: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/AWFUL.json"
             }
         },
         room: {
@@ -2564,11 +2564,11 @@ console.log(basicBot.room.name);
                         if (msg.length <= cmd.length + 1) return API.sendChat(subChat(basicBot.chat.currentlang, {language: basicBot.settings.language}));
                         var argument = msg.substring(cmd.length + 1);
 
-                        $.get("https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json", function (json) {
+                        $.get("https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json", function (json) {
                             var langIndex = json;
                             var link = langIndex[argument.toLowerCase()];
                             if (typeof link === "undefined") {
-                                API.sendChat(subChat(basicBot.chat.langerror, {link: "https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json"}));
+                                API.sendChat(subChat(basicBot.chat.langerror, {link: "https://raw.githubusercontent.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json"}));
                             }
                             else {
                                 basicBot.settings.language = argument;
