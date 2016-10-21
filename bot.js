@@ -87,7 +87,7 @@ return sock.msg(data);
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://cdn.tfs-network.com/plug/TFS-Bot/lang/langIndex.json", function (json) {
+        $.get("https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
@@ -229,9 +229,9 @@ return str;
         status: false,
         name: "TFS Bot",
         loggedInID: null,
-        scriptLink: "https://cdn.tfs-network.com/plug/TFS-Bot/bot.js",
+        scriptLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/bot.js",
         cmdLink: "No current list",
-        chatLink: "https://cdn.tfs-network.com/plug/TFS-Bot/lang/en.json",
+        chatLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/en.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
@@ -239,8 +239,8 @@ return str;
         settings: {
             botName: "TFS Bot",
             language: "english",
-            chatLink: "https://cdn.tfs-network.com/plug/TFS-Bot/lang/en.json",
-            scriptLink: "https://cdn.tfs-network.com/plug/TFS-Bot/bot.js",
+            chatLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/en.json",
+            scriptLink: "https://rawgit.com/TFSNetwork/Plug-Bot/master/bot.js",
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
@@ -298,10 +298,10 @@ return str;
             songstats: true,
             commandLiteral: "!",
             blacklists: {
-                NSFW: "https://cdn.tfs-network.com/plug/TFS-Bot/blacklists/NSFW.json",
-                OP: "https://cdn.tfs-network.com/plug/TFS-Bot/blacklists/OP.json",
-                BANNED: "https://cdn.tfs-network.com/plug/TFS-Bot/blacklists/BANNED.json",
-                AWFUL: "https://cdn.tfs-network.com/plug/TFS-Bot/blacklists/AWFUL.json"
+                NSFW: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/NSFW.json",
+                OP: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/OP.json",
+                BANNED: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/BANNED.json",
+                AWFUL: "https://rawgit.com/TFSNetwork/Plug-Bot/master/blacklists/AWFUL.json"
             }
         },
         room: {
@@ -2538,7 +2538,8 @@ console.log(basicBot.room.name);
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+
+			if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                         storeToStorage();
                         sendToSocket();
@@ -2563,11 +2564,11 @@ console.log(basicBot.room.name);
                         if (msg.length <= cmd.length + 1) return API.sendChat(subChat(basicBot.chat.currentlang, {language: basicBot.settings.language}));
                         var argument = msg.substring(cmd.length + 1);
 
-                        $.get("https://cdn.tfs-network.com/plug/TFS-Bot/lang/langIndex.json", function (json) {
+                        $.get("https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json", function (json) {
                             var langIndex = json;
                             var link = langIndex[argument.toLowerCase()];
                             if (typeof link === "undefined") {
-                                API.sendChat(subChat(basicBot.chat.langerror, {link: "https://cdn.tfs-network.com/plug/TFS-Bot/lang/langIndex.jason"}));
+                                API.sendChat(subChat(basicBot.chat.langerror, {link: "https://rawgit.com/TFSNetwork/Plug-Bot/master/lang/langIndex.json"}));
                             }
                             else {
                                 basicBot.settings.language = argument;
