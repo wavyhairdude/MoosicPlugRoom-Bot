@@ -260,12 +260,12 @@ return str;
             cycleGuard: true,
             maximumCycletime: 10,
             voteSkip: true,
-            voteSkipLimit: 5,
+            voteSkipLimit: 3,
             historySkip: true,
             timeGuard: true,
             maximumSongLength: 8,
             autodisable: true,
-            commandCooldown: 60,
+            commandCooldown: 30,
             usercommandsEnabled: true,
             skipPosition: 3,
             skipReasons: [
@@ -282,17 +282,17 @@ return str;
             motdEnabled: false,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            filterChat: true,
+            filterChat: false,
             etaRestriction: false,
             welcome: true,
             opLink: null,
             rulesLink: null,
             themeLink: null,
             fbLink: null,
-            scLink: null,
+            scLink: "https://tfs-network.com/soundcloud",
             gplusLink: null,
             youtubeLink: null,
-            website: null,
+            website: "https://tfs-network.com",
             intervalMessages: [],
             messageInterval: 5,
             songstats: true,
@@ -1061,7 +1061,7 @@ return API.moderateForceSkip();
                 basicBot.room.autoskipTimer = setTimeout(function () {
                 var endcid = API.getMedia().cid;
 		if (startcid === endcid) {
-                    //API.sendChat('Song stuck, skipping...');
+                    API.sendChat('Song stuck, skipping...');
                     API.moderateForceSkip();
 		}
                 }, remaining + 5000);
