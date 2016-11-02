@@ -2347,7 +2347,7 @@ console.log(basicBot.room.name);
                 }
             },
 
-           gifCommand: {
+	gifCommand: {
                 command: ['gif', 'giphy'],
                 rank: 'user',
                 type: 'startsWith',
@@ -2362,21 +2362,29 @@ console.log(basicBot.room.name);
                             var fixedtag = tag.replace(/ /g,"+");
                             var commatag = tag.replace(/ /g,", ");
 						
-                            function get_id(fixedtag, func)
+                            function get_id(func)
                             {				
 							
                                 $.getJSON(
-					"https://api.giphy.com/v1/gifs/search?q=${this.fixedtag}&limit=1&rating=pg-13&offset=0&api_key=dc6zaTOxFJmzC",
-					{},
-					function(response){func(response.data.id);}
-				)
+								"https://api.giphy.com/v1/gifs/search?",
+								{
+										"format": "json",
+                                        "api_key": "dc6zaTOxFJmzC",
+                                        "rating": "pg-13",
+										"offset": "0",
+										"limit": "1",
+                                        "q": fixedtag
+                                },
+								
+								function(response){func(response.data[0].id);}
+										)
 								
 								
 								
 								
-			    }
+							}
 
-                            get_id(tag, function(id) {
+                            get_id(function(id) {
                                 if (typeof id !== 'undefined') {
                                     API.sendChat(subChat(basicBot.chat.validgiftags, {name: chat.un, id: id, tags: commatag}));
                                 } else {
