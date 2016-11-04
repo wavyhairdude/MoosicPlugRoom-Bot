@@ -1952,7 +1952,7 @@ console.log(basicBot.room.name);
                             function get_src(func)
                             {
                                 $.ajax({
-                                    url: "http://thecatapi.com/api/images/get?",
+                                    url: "https://thecatapi.com/api/images/get?",
                                     data: {
                                         "size": "small"
                                     }}).done(
