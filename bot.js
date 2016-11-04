@@ -1939,6 +1939,36 @@ console.log(basicBot.room.name);
                     }
                 }
             },
+		
+	    catCommand: {
+                command: 'cat',
+                rank: 'user',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+                            function get_src(func)
+                            {
+                                $.ajax({
+                                    url: "http://thecatapi.com/api/images/get?",
+                                    data: {
+                                        "size": "small"
+                                    }}).done(
+                                    function(response) {
+                                        func(response);
+                                    });
+                                
+                            }
+                            get_src(function(src) {
+                                if (typeof src !== 'undefined') {
+                                    API.sendChat(subChat(basicBot.chat.cat, {name: chat.un, src: src}));
+                                }
+                            });
+                    }
+                }
+            },
 
             clearchatCommand: {
                 command: 'clearchat',
