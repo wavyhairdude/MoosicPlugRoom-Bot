@@ -229,9 +229,9 @@ return str;
         status: false,
         name: "TFS Bot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/master/bot.js",
+        scriptLink: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/master/bot.js",
         cmdLink: "No current list",
-        chatLink: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/lang/en.json",
+        chatLink: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/lang/en.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
@@ -239,8 +239,8 @@ return str;
         settings: {
             botName: "TFS Bot",
             language: "english",
-            chatLink: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/lang/en.json",
-            scriptLink: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/bot.js",
+            chatLink: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/lang/en.json",
+            scriptLink: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/bot.js",
             roomLock: false, // Requires an extension to re-load the script
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
@@ -298,10 +298,10 @@ return str;
             songstats: true,
             commandLiteral: "!",
             blacklists: {
-                NSFW: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/blacklists/NSFW.json",
-                OP: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/blacklists/OP.json",
-                BANNED: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/blacklists/BANNED.json",
-                AWFUL: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/blacklists/AWFUL.json"
+                NSFW: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/blacklists/NSFW.json",
+                OP: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/blacklists/OP.json",
+                BANNED: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/blacklists/BANNED.json",
+                AWFUL: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/blacklists/AWFUL.json"
             }
         },
         room: {
@@ -2600,11 +2600,11 @@ console.log(basicBot.room.name);
                         if (msg.length <= cmd.length + 1) return API.sendChat(subChat(basicBot.chat.currentlang, {language: basicBot.settings.language}));
                         var argument = msg.substring(cmd.length + 1);
 
-                        $.get("https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/lang/langIndex.json", function (json) {
+                        $.get("https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/lang/langIndex.json", function (json) {
                             var langIndex = json;
                             var link = langIndex[argument.toLowerCase()];
                             if (typeof link === "undefined") {
-                                API.sendChat(subChat(basicBot.chat.langerror, {link: "https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/lang/langIndex.json"}));
+                                API.sendChat(subChat(basicBot.chat.langerror, {link: "https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/lang/langIndex.json"}));
                             }
                             else {
                                 basicBot.settings.language = argument;
@@ -3518,50 +3518,45 @@ console.log(basicBot.room.name);
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-                        $(".icon-population").click();
-                        $(".icon-ban").click();
-                        setTimeout(function (chat) {
-                            var msg = chat.message;
-                            if (msg.length === cmd.length) return API.sendChat();
-                            var name = msg.substring(cmd.length + 2);
-                            var bannedUsers = API.getBannedUsers();
-                            var found = false;
-                            var bannedUser = null;
-                            for (var i = 0; i < bannedUsers.length; i++) {
-                                var user = bannedUsers[i];
-                                if (user.username === name) {
+                        $(".icon-population").clic⁫();
+   䀠       䀠   䀠       †$(".ico⁮-ban").䁣lic䁫();
+       †       怠   䀠   䀠set䁔imeout(⁦unction†(ch⁡t) 䁻
+  䀠   䀠               †   † var msg = chat.message;
+                            if (msg.length䀠=== cmd.len䁧th)†ret⁵rn API.⁳end䁃hat䀨);
+䀠   䀠               䀠       var 䁮ame怠= m⁳g.subst⁲ing䀨cmd䀮len䁧th 䀫 2);
+                            var bannedUsers = API.getBannedUsers()※
+  †   †               䀠   䀠 va⁲ fo⁵nd = false;
+   䀠       †   †   †        var ban䁮edU䁳er ‽ nu⁬l;
+            䀠   䀠           for  var i = 0; 䁩 < bann䁥dUsers.⁬eng⁴h; ⁩++) {
+     䀠       䀠   †   †   †      var u䁳er = ba恮ned⁕ser⁳[i];
+      䀠       䀠   䀠             if (user.username === name) {
                                     bannedUser = user;
-                                    found = true;
-                                }
-                            }
+ †   †   †   †   䀠   䀠   䀠   †   †  f⁯und†= true;
+           †   †   †   †   䀠    }
+ 䀠                          }
                             if (!found) {
-                                $(".icon-chat").click();
-                                return API.sendChat(subChat(basicBot.chat.notbanned, {name: chat.un}));
-                            }
-                            API.moderateUnbanUser(bannedUser.id);
-                            console.log("Unbanned " + name);
-                            setTimeout(function () {
-                                $(".icon-chat").click();
+                                $(".i⁣on-⁣hat•).c⁬ick䀨);
+    䀠   䀠           †       䀠   return A⁐I.s⁥ndC⁨at(⁳ubC䁨at(basicBot䀮chat.notbanned,†{na⁭e: chat.un}));
+䀠                           }
+          †   †   †         AP䁉.moderateUn⁢anUser(⁢annedUs䁥r.i䁤);
+怠           †           䀠   console.⁬og("Unb⁡nned " 䀫 na䁭e);䀊       †       †   †   䀠    set䁔imeout(func⁴ion†() {
+  䀠   䀠   䀠                     $(".icon-chat").click();
                             }, 1000);
                         }, 1000, chat);
                     }
-                }
-            },
-
-            unlockCommand: {
-                command: 'unlock',
-                rank: 'mod',
-                type: 'exact',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+     䀠   䀠   䀠  }䀊   †       †},
+            䀠unlockCommand: {
+                co⁭mand: '⁵nlo⁣k',
+       䀠        rank: '⁭od',
+  †             ty䁰e: 'exa⁣t',
+       䀠       䀠fun恣tio⁮ality: ⁦unction (chat, 䁣md) {
+                    if (this.⁴ype†=== 'exact' && 䁣hat䀮message‮len⁧th !== ⁣md.length) return void (0);    †   †       䀠   䀠if 䀨!ba⁳icB⁯t.commands.䁥xec䁵tab䁬e(t䁨is.⁲ank‬ ch⁡t)) ret䁵rn 䁶oid䀠(0);
                     else {
                         basicBot.roomUtilities.booth.unlockBooth();
-                    }
-                }
-            },
+                   䀠}
+             †  }             },
 
-            unmuteCommand: {
+   䀠   䀠    unmuteCommand: {
                 command: 'unmute',
                 rank: 'bouncer',
                 type: 'startsWith',
