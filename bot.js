@@ -3518,45 +3518,42 @@ console.log(basicBot.room.name);
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-                        $(".icon-population").clic⁫();
-   䀠       䀠   䀠       †$(".ico⁮-ban").䁣lic䁫();
-       †       怠   䀠   䀠set䁔imeout(⁦unction†(ch⁡t) 䁻
-  䀠   䀠               †   † var msg = chat.message;
-                            if (msg.length䀠=== cmd.len䁧th)†ret⁵rn API.⁳end䁃hat䀨);
-䀠   䀠               䀠       var 䁮ame怠= m⁳g.subst⁲ing䀨cmd䀮len䁧th 䀫 2);
-                            var bannedUsers = API.getBannedUsers()※
-  †   †               䀠   䀠 va⁲ fo⁵nd = false;
-   䀠       †   †   †        var ban䁮edU䁳er ‽ nu⁬l;
-            䀠   䀠           for  var i = 0; 䁩 < bann䁥dUsers.⁬eng⁴h; ⁩++) {
-     䀠       䀠   †   †   †      var u䁳er = ba恮ned⁕ser⁳[i];
-      䀠       䀠   䀠             if (user.username === name) {
+                        $.getJSON('/_/bans', function (json){
+                            var msg = chat.message;
+                            if (msg.length === cmd.length) return;
+                            var name = msg.substring(cmd.length + 2);
+                            var bannedUsers = json.data;
+                            var found = false;
+                            var bannedUser = null;
+                            for (var i = 0; i < bannedUsers.length; i++) {
+                                var user = bannedUsers[i];
+                                if (user.username === name) {
                                     bannedUser = user;
- †   †   †   †   䀠   䀠   䀠   †   †  f⁯und†= true;
-           †   †   †   †   䀠    }
- 䀠                          }
-                            if (!found) {
-                                $(".i⁣on-⁣hat•).c⁬ick䀨);
-    䀠   䀠           †       䀠   return A⁐I.s⁥ndC⁨at(⁳ubC䁨at(basicBot䀮chat.notbanned,†{na⁭e: chat.un}));
-䀠                           }
-          †   †   †         AP䁉.moderateUn⁢anUser(⁢annedUs䁥r.i䁤);
-怠           †           䀠   console.⁬og("Unb⁡nned " 䀫 na䁭e);䀊       †       †   †   䀠    set䁔imeout(func⁴ion†() {
-  䀠   䀠   䀠                     $(".icon-chat").click();
-                            }, 1000);
-                        }, 1000, chat);
+                                    found = true;
+                                }
+                            }
+                            if (!found) return API.sendChat(subChat(basicBot.chat.notbanned, {name: chat.un}));
+                            API.moderateUnbanUser(bannedUser.id);
+                            console.log('Unbanned:', name);
+                        });
                     }
-     䀠   䀠   䀠  }䀊   †       †},
-            䀠unlockCommand: {
-                co⁭mand: '⁵nlo⁣k',
-       䀠        rank: '⁭od',
-  †             ty䁰e: 'exa⁣t',
-       䀠       䀠fun恣tio⁮ality: ⁦unction (chat, 䁣md) {
-                    if (this.⁴ype†=== 'exact' && 䁣hat䀮message‮len⁧th !== ⁣md.length) return void (0);    †   †       䀠   䀠if 䀨!ba⁳icB⁯t.commands.䁥xec䁵tab䁬e(t䁨is.⁲ank‬ ch⁡t)) ret䁵rn 䁶oid䀠(0);
+                }
+            },
+
+            unlockCommand: {
+                command: 'unlock',
+                rank: 'mod',
+                type: 'exact',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                         basicBot.roomUtilities.booth.unlockBooth();
-                   䀠}
-             †  }             },
+                    }
+                }
+            },
 
-   䀠   䀠    unmuteCommand: {
+            unmuteCommand: {
                 command: 'unmute',
                 rank: 'bouncer',
                 type: 'startsWith',
@@ -3564,49 +3561,35 @@ console.log(basicBot.room.name);
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-                        var msg = chat.message;
-                        var permFrom = basicBot.userUtilities.getPermission(chat.uid);
-                        /**
-                         if (msg.indexOf('@') === -1 && msg.indexOf('all') !== -1) {
-                            if (permFrom > 2) {
-                                basicBot.room.mutedUsers = [];
-                                return API.sendChat(subChat(basicBot.chat.unmutedeveryone, {name: chat.un}));
+                        $.getJSON('/_/mutes', function (json){
+                            var msg = chat.message;
+                            if (msg.length === cmd.length) return;
+                            var name = msg.substring(cmd.length+2);
+                            var arg = msg.substring(cmd.length+1);
+                            var mutedUsers = json.data;
+                            var found = false;
+                            var mutedUser = null;
+                            var permFrom = basicBot.userUtilities.getPermission(chat.uid);
+                            if (msg.indexOf('@') === -1 && arg === 'all'){
+                                if (permFrom > 2){
+                                    for (var i = 0; i < mutedUsers.length; i++){
+                                        API.moderateUnmuteUser(mutedUsers[i].id);
+                                    }
+                                    API.sendChat(subChat(basicBot.chat.unmutedeveryone, {name: chat.un}));
+                                } else API.sendChat(subChat(basicBot.chat.unmuteeveryonerank, {name: chat.un}));
+                            } else {
+                                for (var i = 0; i < mutedUsers.length; i++){
+                                    var user = mutedUsers[i];
+                                    if (user.username === name){
+                                        mutedUser = user;
+                                        found = true;
+                                    }
+                                }
+                                if (!found) return API.sendChat(subChat(basicBot.chat.notbanned, {name: chat.un}));
+                                API.moderateUnmuteUser(mutedUser.id);
+                                console.log('Unmuted:', name);
                             }
-                            else return API.sendChat(subChat(basicBot.chat.unmuteeveryonerank, {name: chat.un}));
-                        }
-                         **/
-                        var from = chat.un;
-                        var name = msg.substr(cmd.length + 2);
-
-                        var user = basicBot.userUtilities.lookupUserName(name);
-
-                        if (typeof user === 'boolean') return API.sendChat(subChat(basicBot.chat.invaliduserspecified, {name: chat.un}));
-
-                        var permUser = basicBot.userUtilities.getPermission(user.id);
-                        if (permFrom > permUser) {
-                            /*
-                             var muted = basicBot.room.mutedUsers;
-                             var wasMuted = false;
-                             var indexMuted = -1;
-                             for (var i = 0; i < muted.length; i++) {
-                             if (muted[i] === user.id) {
-                             indexMuted = i;
-                             wasMuted = true;
-                             }
-                             }
-                             if (!wasMuted) return API.sendChat(subChat(basicBot.chat.notmuted, {name: chat.un}));
-                             basicBot.room.mutedUsers.splice(indexMuted);
-                             API.sendChat(subChat(basicBot.chat.unmuted, {name: chat.un, username: name}));
-                             */
-                            try {
-                                API.moderateUnmuteUser(user.id);
-                                API.sendChat(subChat(basicBot.chat.unmuted, {name: chat.un, username: name}));
-                            }
-                            catch (e) {
-                                API.sendChat(subChat(basicBot.chat.notmuted, {name: chat.un}));
-                            }
-                        }
-                        else API.sendChat(subChat(basicBot.chat.unmuterank, {name: chat.un}));
+                        });
                     }
                 }
             },
@@ -3819,6 +3802,7 @@ console.log(basicBot.room.name);
             }
         }
     };
+
 
     loadChat(basicBot.startup);
 }).call(this);
