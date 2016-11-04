@@ -294,6 +294,7 @@
 "toolongago": "\/me @%%NAME%%'s last disconnect (DC or leave) was too long ago: %%TIME%%.",
 "toggleoff": "\/me [@%%NAME%%] %%FUNCTION%% disabled.",
 "toggleon": "\/me [@%%NAME%%] %%FUNCTION%% enabled.",
+"trump": "\/me [@%%NAME%%] %%MSG%%",
 "unmuted": "\/me [@%%NAME%%] Unmuted @%%USERNAME%%.",
 "unmutedeveryone": "\/me [@%%NAME%%] Unmuted everyone.",
 "unmuteeveryonerank": "\/me [@%%NAME%%] Only managers and up can unmute everyone at once.",
