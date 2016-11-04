@@ -1968,8 +1968,7 @@ console.log(basicBot.room.name);
                                 if (typeof xml !== 'undefined') {
 				    var xmlDoc = $.parseXML( xml);
   				    var $xml = $( xmlDoc );
-  				    var $url = $xml.find( "url" );
-              			    var $url = $image.find("url");
+  				    var $url = $xml.find("url");
                                     API.sendChat(subChat(basicBot.chat.cat, {name: chat.un, src: $url.text() + ".jpg" }));
                                 }
                             });
