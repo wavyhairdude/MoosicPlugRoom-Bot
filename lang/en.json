@@ -198,6 +198,7 @@
 "bouncerplusrank": "\/me [@%%NAME%%] You have to be manager or up to enable Bouncer+.",
 "brandambassador": "\/me A Brand Ambassador is the voice of the plug.dj users. They promote events, engage the community and share the plug.dj message around the world. For more info: https:\/\/plug.dj\/ba",
 "caps": "\/me @%%NAME%%, unglue your capslock button please.",
+"cat": "\/me [@%%NAME%%] %%SRC%% [Random Cat]",
 "chatcleared": "\/me [@%%NAME%%] Cleared the chat.",
 "chatfilter": "chatfilter",
 "cmddeletion": "command deletion",
