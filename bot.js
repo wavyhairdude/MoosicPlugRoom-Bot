@@ -87,7 +87,7 @@ return sock.msg(data);
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/lang/langIndex.json", function (json) {
+        $.get("https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/lang/langIndex.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
