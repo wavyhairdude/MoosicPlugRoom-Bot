@@ -1951,19 +1951,26 @@ console.log(basicBot.room.name);
                         var msg = chat.message;
                             function get_src(func)
                             {
-                                $.ajax({
+				$.ajax({
                                     url: "https://thecatapi.com/api/images/get?",
+                                    dataType: "text",
                                     data: {
-                                        "size": "small"
+                                        "size": "small",
+                                        "format": "xml",
+                                        "api_key": "MTMzMDMx"
                                     }}).done(
                                     function(response) {
                                         func(response);
                                     });
                                 
                             }
-                            get_src(function(src) {
-                                if (typeof src !== 'undefined') {
-                                    API.sendChat(subChat(basicBot.chat.cat, {name: chat.un, src: src}));
+                            get_src(function(xml) {
+                                if (typeof xml !== 'undefined') {
+				    var xmlDoc = $.parseXML( xml);
+  				    var $xml = $( xmlDoc );
+  				    var $url = $xml.find( "url" );
+              			    var $url = $image.find("url");
+                                    API.sendChat(subChat(basicBot.chat.cat, {name: chat.un, src: $url.text() + ".jpg" }));
                                 }
                             });
                     }
