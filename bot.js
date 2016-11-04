@@ -3551,6 +3551,63 @@ gifCommand: {
                     }
                 }
             },
+		
+	    trumpCommand: {
+                command: 'trump',
+                rank: 'user',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+                        if (msg.length !== cmd.length) {
+                            var tag = msg.substr(cmd.length + 1);
+                            var fixedtag = tag.replace(/ /g,"+");
+                            function get_quote(func)
+                            {
+                                $.getJSON(
+                                    "https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?",
+                                    {
+                                        "format": "json",
+                                        "q": fixedtag
+                                    },
+                                    function(response)
+                                    {
+                                        func(response.message);
+                                    }
+                                    )
+                            }
+
+                            get_quote(function(msg) {
+                                if (typeof msg !== 'undefined') {
+                                    API.sendChat(subChat(basicBot.chat.trump, {name: chat.un, msg: msg}));
+                                }
+                            });
+                        }
+                        else {
+                            function get_random_quote(func)
+                            {
+                                $.getJSON(
+                                    "https://api.whatdoestrumpthink.com/api/v1/quotes/random",
+                                    {
+                                        "format": "json"
+                                    },
+                                    function(response)
+                                    {
+                                        func(response.message);
+                                    }
+                                    )
+                            }
+                            get_random_quote(function(msg) {
+                                if (typeof msg !== 'undefined') {
+                                    API.sendChat(subChat(basicBot.chat.trump, {name: chat.un, msg: msg}));
+                                }
+                            });
+                        }
+                    }
+                }
+            },		
 
             unbanCommand: {
                 command: 'unban',
