@@ -3563,14 +3563,13 @@ gifCommand: {
                         var msg = chat.message;
                         if (msg.length !== cmd.length) {
                             var tag = msg.substr(cmd.length + 1);
-                            var fixedtag = tag.replace(/ /g,"+");
                             function get_quote(func)
                             {
                                 $.getJSON(
                                     "https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?",
                                     {
                                         "format": "json",
-                                        "q": fixedtag
+                                        "q": msg
                                     },
                                     function(response)
                                     {
