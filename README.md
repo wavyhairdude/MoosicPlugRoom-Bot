@@ -1,3 +1,3 @@
 ```
-javascript:(function(){$.getScript('https://rawgit.com/Dino9Inc/MoosicPlugRoom-Bot/master/bot.js');})();
+javascript:(function(){$.getScript('https://rawgit.com/sandramngo/MoosicPlugRoom-Bot/master/bot.js');})();
 ```
