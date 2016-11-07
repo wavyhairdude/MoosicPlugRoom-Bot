@@ -3569,7 +3569,7 @@ gifCommand: {
                                     "https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?",
                                     {
                                         "format": "json",
-                                        "q": msg
+                                        "q": tag
                                     },
                                     function(response)
                                     {
